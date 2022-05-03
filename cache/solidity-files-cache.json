@@ -1,10 +1,10 @@
 {
   "_format": "hh-sol-cache-2",
   "files": {
-    "/Users/colinbartoe/Desktop/coding/build_space/contracts/Greeter.sol": {
-      "lastModificationDate": 1651371240749,
-      "contentHash": "54c28c84e5277b35b8c8329ce9755dae",
-      "sourceName": "contracts/Greeter.sol",
+    "/Users/colinbartoe/Desktop/coding/build_space/buildspace_solidity_wave/contracts/WavePortal.sol": {
+      "lastModificationDate": 1651443905698,
+      "contentHash": "c6a44435330fd8b0804b64ba9c1e4b7c",
+      "sourceName": "contracts/WavePortal.sol",
       "solcConfig": {
         "version": "0.8.4",
         "settings": {
@@ -35,11 +35,11 @@
         "^0.8.0"
       ],
       "artifacts": [
-        "Greeter"
+        "WavePortal"
       ]
     },
-    "/Users/colinbartoe/Desktop/coding/build_space/node_modules/hardhat/console.sol": {
-      "lastModificationDate": 1651371540793,
+    "/Users/colinbartoe/Desktop/coding/build_space/buildspace_solidity_wave/node_modules/hardhat/console.sol": {
+      "lastModificationDate": 1651442832421,
       "contentHash": "cc4777addd464ea56fa35b1c45df0591",
       "sourceName": "hardhat/console.sol",
       "solcConfig": {
