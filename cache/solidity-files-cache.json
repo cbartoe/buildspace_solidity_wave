@@ -2,11 +2,11 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "/Users/colinbartoe/Desktop/coding/build_space/buildspace_solidity_wave/contracts/WavePortal.sol": {
-      "lastModificationDate": 1651632362065,
+      "lastModificationDate": 1651633667584,
       "contentHash": "5e4644938d6698a0c3b449e47c7e5f68",
       "sourceName": "contracts/WavePortal.sol",
       "solcConfig": {
-        "version": "0.8.4",
+        "version": "0.8.0",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -43,7 +43,7 @@
       "contentHash": "cc4777addd464ea56fa35b1c45df0591",
       "sourceName": "hardhat/console.sol",
       "solcConfig": {
-        "version": "0.8.4",
+        "version": "0.8.0",
         "settings": {
           "optimizer": {
             "enabled": false,
