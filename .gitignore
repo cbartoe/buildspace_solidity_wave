@@ -132,3 +132,6 @@ dmypy.json
 # hardhat config
 hardhat.config.js
 example_hardhat.config.js
+
+# dotenv files
+secrets.env
