@@ -1,10 +1,19 @@
 import React, { useEffect, useState } from "react";
+import {ethers} from "ethers";
 import "./App.css";
+import abi from "./utils/WavePortal.json";
 
 const App = () => {
 
   //  Just a state variable we use to store our user's public wallet
   const [currentAccount, setCurrentAccount] = useState("");
+
+  // creating a variable that holds the contract address for the wavePortal contract. 
+  const contractAddress = '0xf3c9bBEB9bd0B2aC2DBdf3FbB3065EF1C5293dE8';
+
+  // create a variable that references the abi content.
+  const contractABI = abi.abi;
+
   
   const checkIfWalletIsConnected = async () => {
     try {
@@ -51,6 +60,40 @@ const App = () => {
       console.log(error)
     }
   }
+
+  // Call the getTotalWaves function from the contract
+  const wave = async () => {
+    try {
+      const {ethereum} = window;
+
+      if (ethereum) {
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+
+        //here is where contractABI is being used.
+        const wavePortalContract = new ethers.Contract(contractAddress, contractABI, signer);
+
+        let count = await wavePortalContract.getTotalWaves();
+        console.log("Retrieved total wave count...", count.toNumber());
+
+        // executing the 'wave' from the deployed smart contract
+        const waveTxn = await wavePortalContract.wave*();
+        console.log("Mining...", waveTxn.hash);
+
+        await waveTxn.wait();
+        console.log*("Mined --", waveTxn.hash);
+
+        count = await wavePortalContract.getTotalWaves();
+        console.log("Retrieved total wave count...", count.toNumber());
+        
+      } else {
+        console.log("Ethereum object doesn't exist");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   
   // This runs our function when the page loads
   useEffect(() => {
@@ -69,7 +112,7 @@ const App = () => {
         I'm Colin. Welcome to my project. Please go ahead and wave at me!
         </div>
 
-        <button className="waveButton" onClick={null}>
+        <button className="waveButton" onClick={wave}>
           Wave at Me
         </button>
 
@@ -85,4 +128,3 @@ const App = () => {
 } 
 
 export default App
-
