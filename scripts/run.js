@@ -1,19 +1,34 @@
 
 const main = async () => {
-    const [owner, randomPerson] = await hre.ethers.getSigners();
+    // const [owner, randomPerson] = await hre.ethers.getSigners();
     const waveContractFactory = await hre.ethers.getContractFactory("WavePortal");
     const waveContract = await waveContractFactory.deploy();
     await waveContract.deployed();
+    console.log("Contract addy:", waveContract.address);
 
-    console.log("Contract deployed to contract address:", waveContract.address);
-    console.log("Contract deployed by wallet address:", owner.address);
+    // console.log("Contract deployed to contract address:", waveContract.address);
+    // console.log("Contract deployed by wallet address:", owner.address);
 
     let waveCount;
     waveCount = await waveContract.getTotalWaves();
+    console.log(waveCount.toNumber());
 
-    let waveTxn = await waveContract.wave();
-    await waveTxn.wait();
 
+    // let's send a few waves with messages!
+    let waveTxn = await waveContract.wave("A Message!");
+    await waveTxn.wait(); // waiting for the wave/message to be mined
+
+    const [_, randomPerson] = await hre.ethers.getSigners();
+    waveTxn = await waveContract.connect(randomPerson).wave("Another happy message!");
+    await waveTxn.wait(); 
+
+    let allWaves = await waveContract.getAllWaves();
+    console.log(allWaves);
+
+
+
+    // Old commands before message addition
+    /*
     let wavesPerAddy = await waveContract.saveWaver();
     await wavesPerAddy.wait();
 
@@ -34,6 +49,7 @@ const main = async () => {
     await wavesPerAddy2.wait();
 
     waveCount = await waveContract.getTotalWaves();
+    */
 };
 
 const runMain = async () => {
