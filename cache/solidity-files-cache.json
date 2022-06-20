@@ -2,8 +2,8 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "/Users/colinbartoe/Desktop/coding/build_space/buildspace_solidity_wave/contracts/WavePortal.sol": {
-      "lastModificationDate": 1651633667584,
-      "contentHash": "5e4644938d6698a0c3b449e47c7e5f68",
+      "lastModificationDate": 1655263032342,
+      "contentHash": "b9a2030138728580f9d64588b578ed8e",
       "sourceName": "contracts/WavePortal.sol",
       "solcConfig": {
         "version": "0.8.0",

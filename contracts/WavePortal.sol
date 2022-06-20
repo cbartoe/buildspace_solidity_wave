@@ -7,11 +7,15 @@ import "hardhat/console.sol";
 contract WavePortal {
     uint256 totalWaves;
  
+    // We will be using this below to help generate a random number
+    uint256 private seed;
+    
+
     // Creating an Event so we can late Emit the transaction info for easy finding.
     event NewWave(address indexed from, uint256 timestamp, string message);
 
     /* Here is a struct here named Wave.
-    A struct is basically a custom data type where we can cuttomize what we want to hold inside it.
+    A struct is basically a custom data type where we can customize what we want to hold inside it.
     */
     struct Wave {
         address waver; //the addy of the user who is waving
@@ -27,8 +31,10 @@ contract WavePortal {
     */
     Wave[] waves;
 
-    constructor() {
-        console.log("I AM SMART CONTRACT. POG.");
+    constructor() payable {
+        console.log("We have been constructed!");
+        //Set the initial seed
+        seed = (block.timestamp, block.difficulty) % 100;
     }
 
     //The old constructor for reference
@@ -42,15 +48,43 @@ contract WavePortal {
 
     /* Here we change the wave function a bit to require a string called "message". This is the message our users send us. 
     */
-    function wave(sttring memory _message) public {
+    function wave(string memory _message) public {
         totalWaves +=1;
         console.log("%s waved w/ message %s", msg.sender, _message);
 
         // store tthe wave data in the array
         waves.push(Wave(msg.sender, _message, block.timestamp));
 
+        // generate a new seed for the next user that sends a wave
+        seed = (block.difficulty + block.timestamp + seed) % 100;
+        console.log("Random # generated: %d", seed)
+
+        // Give a 50% chance that the users wins the prize
+        if (seed <=50) {
+            console.log("%s won!", msg.sender);
+
+            // The same code we had before to send the prize
+            uint256 prizeAmount = 0.0001 ether;
+            require(
+                prizeAmount <= address(this).balance, "Error: Trying to withdrawal more currency than the wallet contains");
+            (bool success, ) = (msg.sender).call{value: prizeAmount}("");
+            require(success, "Failed to withdrawal money from contract.");
+            
+        }
+
+
         // Adding some fanciness by emitting the event where msg.sender is the "from" part of the Event.
         emit NewWave(msg.sender, block.timestamp, _message);
+
+        uint256 prizeAmount = 0.0001 ether;
+        require(
+            prizeAmount <= address(this).balance,
+            "Trying to withdraw more money than the contract has."
+        );
+        (bool success, ) = (msg.sender).call{value: prizeAmount}("");
+        require(success, "Failed to withdraw money from contract.");
+
+        console.log("Ether Sent");
     }
 
     // The old wave function for reference.
