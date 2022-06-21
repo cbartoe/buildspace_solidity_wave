@@ -25,17 +25,33 @@ const main = async () => {
     /* let waveCount;
     waveCount = await waveContract.getTotalWaves();
     console.log(waveCount.toNumber()); */
+    
+    // Let's try 2 waves now
+    const waveTxn = await waveContract.wave("This is wave #1");
+    await waveTxn.wait();
 
+    contractBalance = await hre.ethers.provider.getBalance(waveContract.address);
+    console.log("Contract Balance: ",
+        hre.ethers.utils.formatEther(contractBalance)
+    );
 
+    const waveTxn2 = await waveContract.wave("This is wave #2");
+    await waveTxn2.wait();
+    
+    contractBalance = await hre.ethers.provider.getBalance(waveContract.address);
+    console.log("Contract Balance: ",
+        hre.ethers.utils.formatEther(contractBalance)
+    );
+
+    /* old wave schema
     // let's send a  wave!
     let waveTxn = await waveContract.wave("A Message!");
     await waveTxn.wait(); // waiting for the wave/message to be mined
-
+    */
 
     // Let's get the contract balance after the wave
     contractBalance = await hre.ethers.provider.getBalance(waveContract.address);
-    console.log(
-        "Contract Balance: ",
+    console.log("Contract Balance: ",
         hre.ethers.utils.formatEther(contractBalance)
     );
 
@@ -47,7 +63,6 @@ const main = async () => {
 
     let allWaves = await waveContract.getAllWaves();
     console.log(allWaves);
-
 
 
     // Old commands before message addition

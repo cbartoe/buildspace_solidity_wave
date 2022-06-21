@@ -31,10 +31,15 @@ contract WavePortal {
     */
     Wave[] waves;
 
+
+    // This is an address => uint mapping, meaing that I can associate an addy with a number. In this case, I will be storing the address with the last time the user waved at us.
+    mapping(address => uint256) public lastWavedAt;
+
+
     constructor() payable {
         console.log("We have been constructed!");
         //Set the initial seed
-        seed = (block.timestamp, block.difficulty) % 100;
+        seed = (block.timestamp + block.difficulty) % 100;
     }
 
     //The old constructor for reference
@@ -49,15 +54,25 @@ contract WavePortal {
     /* Here we change the wave function a bit to require a string called "message". This is the message our users send us. 
     */
     function wave(string memory _message) public {
+        // we need to make sure that the current timestamp is at least 15mins from the last time this address waved.
+       require(
+            lastWavedAt[msg.sender] + 30 seconds < block.timestamp, "Please wait 15mins."
+        ); 
+
+        // update the current timestamp we have for the user
+        lastWavedAt[msg.sender] = block.timestamp;
+        
         totalWaves +=1;
         console.log("%s waved w/ message %s", msg.sender, _message);
 
         // store tthe wave data in the array
         waves.push(Wave(msg.sender, _message, block.timestamp));
 
+
+
         // generate a new seed for the next user that sends a wave
         seed = (block.difficulty + block.timestamp + seed) % 100;
-        console.log("Random # generated: %d", seed)
+        console.log("Random # generated: %d", seed);
 
         // Give a 50% chance that the users wins the prize
         if (seed <=50) {
