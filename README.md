@@ -1,23 +1,13 @@
 # buildspace_solidity_wave
 
-The Buildspace solidity project to create a blockchain interaction with "waves", text, and front end engagement. 
+The Buildspace solidity project to create a blockchain interaction with "waves", text, and front end engagement. The app will allow users to connect a wallet, enter a message, and create a transaction to "wave" to me. An option has also been added to grant a 50% chance of Rinkeby Eth being sent to the user as a random gift. 
 
-##Beginning with HardHat and a localhost chain
-1. Creating the WavePortal.sol contract, run.js, and deploy.js
-2. Using HardHat to create a temporary localhost eth blockchain and running the contract. 
-
-## Running React on Repl.it
-1. Using already coded front end design forked from FarzaTV to practice working on javascript etc.
+## The Pieces
+1. wavePortal.sol contract was composed in VSCode following the BuildSpace instructions
+2. run.js and deploy.js were composed in VSCode as well to test and deploy the contract to the Rinkeby testnet. 
+3. App.jsx and supporting files were composed in Replit as a means to import pre-made front end code and host the web app for testing and use. 
 
 
-[React](https://reactjs.org/) is a popular JavaScript library for building user interfaces.
+## Web App
+https://waveportal-starter-project.cbartoe.repl.co
 
-[Vite](https://vitejs.dev/) is a blazing fast frontend build tool that includes features like Hot Module Reloading (HMR), optimized builds, and TypeScript support out of the box.
-
-Using the two in conjunction is one of the fastest ways to build a web app.
-
-### Getting Started
-- Hit run
-- Edit [App.jsx](#src/App.jsx) and watch it live update!
-
-By default, Replit runs the `dev` script, but you can configure it by changing the `run` field in the `.replit` file.
